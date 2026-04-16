@@ -3,6 +3,9 @@ import api from '../api/axios'
 import toast from 'react-hot-toast'
 import Badge from '../components/Badge'
 import { Plus, Pencil, Trash2, X, CheckCircle } from 'lucide-react'
+import { useSort } from '../hooks/useSort.jsx'
+import { generateInvoicePDF } from '../utils/generatePDF'
+import { Download } from 'lucide-react'
 
 const EMPTY = { client: '', project: '', amount: '', status: 'brouillon', issued_date: '', due_date: '', notes: '' }
 
@@ -80,6 +83,8 @@ export default function Invoices() {
   const filtered = filter === 'all' ? invoices : invoices.filter(i => i.status === filter)
   const totalFiltered = filtered.reduce((s, i) => s + parseFloat(i.amount), 0)
   const clientProjects = projects.filter(p => p.client === parseInt(form.client))
+  const { sorted: sortedClients, toggleSort, SortIcon } = useSort(filtered, 'name')
+
 
   return (
     <div>
@@ -109,13 +114,12 @@ export default function Invoices() {
         <table>
           <thead>
             <tr>
-              <th>N° Facture</th>
-              <th>Client</th>
-              <th>Projet</th>
-              <th>Montant</th>
-              <th>Statut</th>
-              <th>Échéance</th>
-              <th style={{ width: 110 }}>Actions</th>
+              <th onClick={() => toggleSort('name')}    style={{ cursor:'pointer', userSelect:'none' }}>Client <SortIcon col="name"/></th>
+              <th onClick={() => toggleSort('email')}   style={{ cursor:'pointer', userSelect:'none' }}>Email <SortIcon col="email"/></th>
+              <th onClick={() => toggleSort('phone')}   style={{ cursor:'pointer', userSelect:'none' }}>Téléphone <SortIcon col="phone"/></th>
+              <th onClick={() => toggleSort('company')} style={{ cursor:'pointer', userSelect:'none' }}>Société <SortIcon col="company"/></th>
+              <th>Projets</th>
+              <th style={{ width:80 }}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -125,7 +129,7 @@ export default function Invoices() {
                 Aucune facture {filter !== 'all' ? 'avec ce statut' : '— crée la première !'}
               </td></tr>
             )}
-            {filtered.map(inv => (
+            {sortedClients.map(inv => (
               <tr key={inv.id}>
                 <td style={{ fontFamily: 'monospace', fontSize: 12, fontWeight: 600, color: 'var(--primary-dark)' }}>{inv.invoice_number}</td>
                 <td style={{ fontWeight: 500 }}>{inv.client_name}</td>
@@ -145,12 +149,21 @@ export default function Invoices() {
                     <button onClick={() => openEdit(inv)} style={{ background: 'none', padding: 6, borderRadius: 6, border: '1px solid var(--border)', color: 'var(--text-muted)', display: 'flex' }}>
                       <Pencil size={13} />
                     </button>
+                    <button
+                      onClick={() => generateInvoicePDF(inv)}
+                      title="Télécharger PDF"
+                      style={{ background:'none', padding:6, borderRadius:6, border:'1px solid var(--border)', color:'var(--info)', display:'flex' }}
+                    >
+                      <Download size={13} />
+                    </button>
                     <button onClick={() => handleDelete(inv.id)} style={{ background: 'none', padding: 6, borderRadius: 6, border: '1px solid var(--border)', color: '#E24B4A', display: 'flex' }}>
                       <Trash2 size={13} />
                     </button>
+                    
                   </div>
                 </td>
               </tr>
+              
             ))}
           </tbody>
         </table>

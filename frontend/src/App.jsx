@@ -12,6 +12,9 @@ import Projects  from './pages/Projects'
 import Invoices  from './pages/Invoices'
 import Reminders from './pages/Reminders'
 
+import Profile from './pages/Profile'
+
+
 function App() {
   return (
     <AuthProvider>
@@ -27,6 +30,8 @@ function App() {
           <Route path="/projects"  element={<PrivateRoute><Layout><Projects /></Layout></PrivateRoute>} />
           <Route path="/invoices"  element={<PrivateRoute><Layout><Invoices /></Layout></PrivateRoute>} />
           <Route path="/reminders" element={<PrivateRoute><Layout><Reminders /></Layout></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Layout><Profile /></Layout></PrivateRoute>} />
+
         </Routes>
       </BrowserRouter>
     </AuthProvider>

@@ -3,6 +3,7 @@ import api from '../api/axios'
 import toast from 'react-hot-toast'
 import Badge from '../components/Badge'
 import { Plus, Pencil, Trash2, X } from 'lucide-react'
+import { useSort } from '../hooks/useSort.jsx'
 
 const EMPTY = { title: '', description: '', client: '', status: 'lead', budget: '', start_date: '', end_date: '' }
 
@@ -69,7 +70,11 @@ export default function Projects() {
     } catch { toast.error('Erreur lors de la suppression') }
   }
 
+
   const filtered = filter === 'all' ? projects : projects.filter(p => p.status === filter)
+
+    const { sorted: sortedClients, toggleSort, SortIcon } = useSort(filtered, 'name')
+
 
   return (
     <div>
@@ -110,13 +115,12 @@ export default function Projects() {
         <table>
           <thead>
             <tr>
-              <th>Titre</th>
-              <th>Client</th>
-              <th>Statut</th>
-              <th>Budget</th>
-              <th>Début</th>
-              <th>Fin</th>
-              <th style={{ width: 80 }}>Actions</th>
+              <th onClick={() => toggleSort('name')}    style={{ cursor:'pointer', userSelect:'none' }}>Client <SortIcon col="name"/></th>
+              <th onClick={() => toggleSort('email')}   style={{ cursor:'pointer', userSelect:'none' }}>Email <SortIcon col="email"/></th>
+              <th onClick={() => toggleSort('phone')}   style={{ cursor:'pointer', userSelect:'none' }}>Téléphone <SortIcon col="phone"/></th>
+              <th onClick={() => toggleSort('company')} style={{ cursor:'pointer', userSelect:'none' }}>Société <SortIcon col="company"/></th>
+              <th>Projets</th>
+              <th style={{ width:80 }}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -126,7 +130,7 @@ export default function Projects() {
                 Aucun projet {filter !== 'all' ? 'avec ce statut' : '— crée le premier !'}
               </td></tr>
             )}
-            {filtered.map(p => (
+            {sortedClients.map(p => (
               <tr key={p.id}>
                 <td style={{ fontWeight: 500 }}>{p.title}</td>
                 <td style={{ color: 'var(--text-muted)' }}>{p.client_name}</td>

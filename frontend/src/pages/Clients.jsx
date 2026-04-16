@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import api from '../api/axios'
 import toast from 'react-hot-toast'
 import { Plus, Search, Pencil, Trash2, X, Building2, Mail, Phone } from 'lucide-react'
+import { useSort } from '../hooks/useSort.jsx'
 
 const EMPTY = { name: '', email: '', phone: '', company: '', address: '', notes: '' }
 
@@ -61,6 +62,9 @@ export default function Clients() {
     c.company.toLowerCase().includes(search.toLowerCase())
   )
 
+  const { sorted: sortedClients, toggleSort, SortIcon } = useSort(filtered, 'name')
+
+
   return (
     <div>
       {/* Header */}
@@ -97,12 +101,12 @@ export default function Clients() {
         <table>
           <thead>
             <tr>
-              <th>Client</th>
-              <th>Email</th>
-              <th>Téléphone</th>
-              <th>Société</th>
+              <th onClick={() => toggleSort('name')}    style={{ cursor:'pointer', userSelect:'none' }}>Client <SortIcon col="name"/></th>
+              <th onClick={() => toggleSort('email')}   style={{ cursor:'pointer', userSelect:'none' }}>Email <SortIcon col="email"/></th>
+              <th onClick={() => toggleSort('phone')}   style={{ cursor:'pointer', userSelect:'none' }}>Téléphone <SortIcon col="phone"/></th>
+              <th onClick={() => toggleSort('company')} style={{ cursor:'pointer', userSelect:'none' }}>Société <SortIcon col="company"/></th>
               <th>Projets</th>
-              <th style={{ width: 80 }}>Actions</th>
+              <th style={{ width:80 }}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -114,7 +118,7 @@ export default function Clients() {
                 {search ? 'Aucun résultat' : 'Aucun client encore — crée le premier !'}
               </td></tr>
             )}
-            {filtered.map(c => (
+            {sortedClients.map(c => (
               <tr key={c.id}>
                 <td>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
