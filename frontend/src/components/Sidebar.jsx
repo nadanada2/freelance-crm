@@ -9,14 +9,24 @@ import { Sun, Moon } from 'lucide-react'
 
 import { Settings } from 'lucide-react'
 
+import { Kanban, Clock } from 'lucide-react'
+
 
 const links = [
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+  /*{ to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/clients',   icon: Users,           label: 'Clients'   },
   { to: '/projects',  icon: FolderOpen,      label: 'Projets'   },
   { to: '/invoices',  icon: FileText,         label: 'Factures'  },
   { to: '/reminders', icon: Bell,             label: 'Rappels'   },
-  { to: '/profile', icon: Settings, label: 'Profil' },
+  { to: '/profile', icon: Settings, label: 'Profil' },*/
+  { to: '/dashboard',     icon: LayoutDashboard, label: 'Dashboard'    },
+  { to: '/pipeline',      icon: Kanban,           label: 'Pipeline'     },
+  { to: '/clients',       icon: Users,            label: 'Clients'      },
+  { to: '/projects',      icon: FolderOpen,       label: 'Projets'      },
+  { to: '/invoices',      icon: FileText,         label: 'Factures'     },
+  { to: '/time-tracking', icon: Clock,            label: 'Temps'        },
+  { to: '/reminders',     icon: Bell,             label: 'Rappels'      },
+  { to: '/profile',       icon: Settings,         label: 'Profil'       },
 
 ]
 

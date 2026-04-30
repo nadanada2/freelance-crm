@@ -14,6 +14,11 @@ import Reminders from './pages/Reminders'
 
 import Profile from './pages/Profile'
 
+import Pipeline      from './pages/Pipeline'
+import ClientDetail  from './pages/ClientDetail'
+import TimeTracking  from './pages/TimeTracking'
+
+
 
 function App() {
   return (
@@ -31,6 +36,10 @@ function App() {
           <Route path="/invoices"  element={<PrivateRoute><Layout><Invoices /></Layout></PrivateRoute>} />
           <Route path="/reminders" element={<PrivateRoute><Layout><Reminders /></Layout></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Layout><Profile /></Layout></PrivateRoute>} />
+          
+          <Route path="/pipeline"        element={<PrivateRoute><Layout><Pipeline /></Layout></PrivateRoute>} />
+          <Route path="/clients/:id"     element={<PrivateRoute><Layout><ClientDetail /></Layout></PrivateRoute>} />
+          <Route path="/time-tracking"   element={<PrivateRoute><Layout><TimeTracking /></Layout></PrivateRoute>} />
 
         </Routes>
       </BrowserRouter>

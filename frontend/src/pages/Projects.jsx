@@ -115,12 +115,13 @@ export default function Projects() {
         <table>
           <thead>
             <tr>
-              <th onClick={() => toggleSort('name')}    style={{ cursor:'pointer', userSelect:'none' }}>Client <SortIcon col="name"/></th>
-              <th onClick={() => toggleSort('email')}   style={{ cursor:'pointer', userSelect:'none' }}>Email <SortIcon col="email"/></th>
-              <th onClick={() => toggleSort('phone')}   style={{ cursor:'pointer', userSelect:'none' }}>Téléphone <SortIcon col="phone"/></th>
-              <th onClick={() => toggleSort('company')} style={{ cursor:'pointer', userSelect:'none' }}>Société <SortIcon col="company"/></th>
-              <th>Projets</th>
-              <th style={{ width:80 }}>Actions</th>
+              <th onClick={() => toggleSort('name')}    style={{ cursor:'pointer', userSelect:'none' }}>PROJET <SortIcon col="name"/></th>
+              <th onClick={() => toggleSort('email')}   style={{ cursor:'pointer', userSelect:'none' }}>CLIENT <SortIcon col="email"/></th>
+              <th onClick={() => toggleSort('phone')}   style={{ cursor:'pointer', userSelect:'none' }}>ETAT <SortIcon col="phone"/></th>
+              <th onClick={() => toggleSort('company')} style={{ cursor:'pointer', userSelect:'none' }}>MONTANT <SortIcon col="company"/></th>
+              <th>DEBUT</th>
+              <th>FIN</th>
+              <th style={{ width:80 }}>ACTIONS</th>
             </tr>
           </thead>
           <tbody>

@@ -64,6 +64,8 @@ export default function Clients() {
 
   const { sorted: sortedClients, toggleSort, SortIcon } = useSort(filtered, 'name')
 
+  const navigate = useNavigate()
+
 
   return (
     <div>
@@ -119,54 +121,91 @@ export default function Clients() {
               </td></tr>
             )}
             {sortedClients.map(c => (
-              <tr key={c.id}>
-                <td>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <div style={{
-                      width: 34, height: 34, borderRadius: '50%',
-                      background: 'var(--primary-light)', color: 'var(--primary-dark)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 12, fontWeight: 700, flexShrink: 0,
-                    }}>
-                      {c.name.slice(0, 2).toUpperCase()}
-                    </div>
-                    <span style={{ fontWeight: 500 }}>{c.name}</span>
+            <tr
+              key={c.id}
+              style={{ cursor:'pointer' }}
+              onClick={() => navigate(`/clients/${c.id}`)}
+            >
+              <td>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{
+                    width: 34, height: 34, borderRadius: '50%',
+                    background: 'var(--primary-light)', color: 'var(--primary-dark)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 12, fontWeight: 700, flexShrink: 0,
+                  }}>
+                    {c.name.slice(0, 2).toUpperCase()}
                   </div>
-                </td>
-                <td style={{ color: 'var(--text-muted)' }}>{c.email || '—'}</td>
-                <td style={{ color: 'var(--text-muted)' }}>{c.phone || '—'}</td>
-                <td>
-                  {c.company
-                    ? <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                        <Building2 size={13} color="var(--text-muted)" />{c.company}
-                      </span>
-                    : '—'}
-                </td>
-                <td>
-                  <span style={{ background: 'var(--primary-light)', color: 'var(--primary-dark)', fontSize: 11, fontWeight: 600, padding: '2px 9px', borderRadius: 99 }}>
-                    {c.projects_count} projet{c.projects_count !== 1 ? 's' : ''}
+                  <span style={{ fontWeight: 500 }}>{c.name}</span>
+                </div>
+              </td>
+
+              <td style={{ color: 'var(--text-muted)' }}>{c.email || '—'}</td>
+              <td style={{ color: 'var(--text-muted)' }}>{c.phone || '—'}</td>
+
+              <td>
+                {c.company ? (
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <Building2 size={13} color="var(--text-muted)" />
+                    {c.company}
                   </span>
-                </td>
-                <td>
-                  <div style={{ display: 'flex', gap: 6 }}>
-                    <button onClick={() => openEdit(c)} style={{
-                      background: 'none', padding: 6, borderRadius: 6,
-                      border: '1px solid var(--border)', color: 'var(--text-muted)',
-                      display: 'flex', alignItems: 'center',
-                    }}>
-                      <Pencil size={13} />
-                    </button>
-                    <button onClick={() => handleDelete(c.id)} style={{
-                      background: 'none', padding: 6, borderRadius: 6,
-                      border: '1px solid var(--border)', color: '#E24B4A',
-                      display: 'flex', alignItems: 'center',
-                    }}>
-                      <Trash2 size={13} />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                ) : '—'}
+              </td>
+
+              <td>
+                <span style={{
+                  background: 'var(--primary-light)',
+                  color: 'var(--primary-dark)',
+                  fontSize: 11,
+                  fontWeight: 600,
+                  padding: '2px 9px',
+                  borderRadius: 99
+                }}>
+                  {c.projects_count} projet{c.projects_count !== 1 ? 's' : ''}
+                </span>
+              </td>
+
+              <td>
+                <div style={{ display: 'flex', gap: 6 }}>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      openEdit(c)
+                    }}
+                    style={{
+                      background: 'none',
+                      padding: 6,
+                      borderRadius: 6,
+                      border: '1px solid var(--border)',
+                      color: 'var(--text-muted)',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Pencil size={13} />
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDelete(c.id)
+                    }}
+                    style={{
+                      background: 'none',
+                      padding: 6,
+                      borderRadius: 6,
+                      border: '1px solid var(--border)',
+                      color: '#E24B4A',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Trash2 size={13} />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
           </tbody>
         </table>
       </div>

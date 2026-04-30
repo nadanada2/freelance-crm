@@ -17,8 +17,17 @@ export default function Register() {
       toast.success('Compte créé ! Connecte-toi.')
       navigate('/login')
     } catch (err) {
-      toast.error('Erreur lors de l\'inscription')
-    } finally {
+      console.log('Erreur détail:', err.response?.data)
+      const errors = err.response?.data
+      if (errors) {
+        const msg = Object.entries(errors)
+        .map(([key, val]) => `${key}: ${Array.isArray(val) ? val[0] : val}`)
+        .join(' | ')
+        toast.error(msg)
+      } else {
+        toast.error("Erreur lors de l'inscription")
+  }
+} finally {
       setLoading(false)
     }
   }
