@@ -9,7 +9,7 @@ import { Sun, Moon } from 'lucide-react'
 
 import { Settings } from 'lucide-react'
 
-import { Kanban, Clock } from 'lucide-react'
+import { Kanban, Clock, Mail } from 'lucide-react'
 
 
 const links = [
@@ -25,6 +25,7 @@ const links = [
   { to: '/projects',      icon: FolderOpen,       label: 'Projets'      },
   { to: '/invoices',      icon: FileText,         label: 'Factures'     },
   { to: '/time-tracking', icon: Clock,            label: 'Temps'        },
+  { to: '/emails',        icon: Mail,             label: 'Emails'       },
   { to: '/reminders',     icon: Bell,             label: 'Rappels'      },
   { to: '/profile',       icon: Settings,         label: 'Profil'       },
 

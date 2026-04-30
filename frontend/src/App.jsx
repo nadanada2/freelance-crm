@@ -19,6 +19,7 @@ import ClientDetail  from './pages/ClientDetail'
 import TimeTracking  from './pages/TimeTracking'
 
 import Landing from './pages/Landing'
+import Emails  from './pages/Emails'
 
 
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/pipeline"        element={<PrivateRoute><Layout><Pipeline /></Layout></PrivateRoute>} />
           <Route path="/clients/:id"     element={<PrivateRoute><Layout><ClientDetail /></Layout></PrivateRoute>} />
           <Route path="/time-tracking"   element={<PrivateRoute><Layout><TimeTracking /></Layout></PrivateRoute>} />
+          <Route path="/emails"          element={<PrivateRoute><Layout><Emails /></Layout></PrivateRoute>} />
 
         </Routes>
       </BrowserRouter>

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'clients',
     'projects',
     'invoices',
+    'emails',
 
 ]
 
@@ -162,3 +163,20 @@ SIMPLE_JWT = {
 }
 
 
+
+
+# ──────────────────────────────────────────────────
+#  Configuration Email SMTP
+#  En local (affiche dans le terminal) :
+#    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#  Pour vrai envoi : passer EMAIL_BACKEND=smtp et remplir les vars env
+# ──────────────────────────────────────────────────
+import os
+
+EMAIL_BACKEND       = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_HOST          = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT          = int(os.environ.get('EMAIL_PORT', '587'))
+EMAIL_USE_TLS       = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
+EMAIL_HOST_USER     = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL  = os.environ.get('DEFAULT_FROM_EMAIL', 'Flowlance <noreply@flowlance.app>')

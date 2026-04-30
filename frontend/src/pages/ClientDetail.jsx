@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import api from '../api/axios'
 import toast from 'react-hot-toast'
 import Badge from '../components/Badge'
-import { ArrowLeft, Plus, Phone, Mail, Users, FileText, StickyNote, X } from 'lucide-react'
+import { ArrowLeft, Plus, Phone, Mail, Users, FileText, StickyNote, X, Send } from 'lucide-react'
 
 const TYPE_ICONS = {
   appel:   { icon: Phone,     color: '#185FA5', bg: '#E6F1FB' },
@@ -102,9 +102,14 @@ export default function ClientDetail() {
             </p>
           </div>
         </div>
-        <button onClick={() => setModal(true)} style={{ display:'flex', alignItems:'center', gap:6, background:'var(--primary)', color:'#fff', padding:'9px 18px', borderRadius:'var(--radius)', fontWeight:600, fontSize:13 }}>
-          <Plus size={15}/> Ajouter un échange
-        </button>
+        <div style={{ display:'flex', gap:8 }}>
+          <button onClick={() => navigate(`/emails?client=${id}&email=${client.email}`)} style={{ display:'flex', alignItems:'center', gap:6, background:'var(--surface)', color:'var(--text)', padding:'9px 18px', borderRadius:'var(--radius)', fontWeight:600, fontSize:13, border:'1px solid var(--border)' }}>
+            <Send size={15}/> Envoyer un email
+          </button>
+          <button onClick={() => setModal(true)} style={{ display:'flex', alignItems:'center', gap:6, background:'var(--primary)', color:'#fff', padding:'9px 18px', borderRadius:'var(--radius)', fontWeight:600, fontSize:13 }}>
+            <Plus size={15}/> Ajouter un échange
+          </button>
+        </div>
       </div>
 
       {/* KPIs client */}
