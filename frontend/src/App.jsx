@@ -18,6 +18,8 @@ import Pipeline      from './pages/Pipeline'
 import ClientDetail  from './pages/ClientDetail'
 import TimeTracking  from './pages/TimeTracking'
 
+import Landing from './pages/Landing'
+
 
 
 function App() {
@@ -26,7 +28,7 @@ function App() {
       <BrowserRouter>
         <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
         <Routes>
-          <Route path="/"         element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/login"    element={<Login />} />
           <Route path="/register" element={<Register />} />
 

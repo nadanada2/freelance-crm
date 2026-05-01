@@ -53,7 +53,7 @@ export default function Sidebar() {
           alignItems: 'center', justifyContent: 'center',
           fontSize: 13, fontWeight: 700, color: '#fff',
         }}>F</div>
-        <span style={{ color: '#fff', fontWeight: 600, fontSize: 15 }}>FreelanceCRM</span>
+        <span style={{ color:'#fff', fontWeight:600, fontSize:15 }}>Flowlance</span>
       </div>
 
       {/* Nav */}

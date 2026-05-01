@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
+import { ArrowLeft } from 'lucide-react'
+
 
 export default function Login() {
   const [form, setForm] = useState({ username: '', password: '' })
@@ -24,11 +26,13 @@ export default function Login() {
   }
 
   return (
+    
     <div style={{
       minHeight: '100vh', display: 'flex',
       alignItems: 'center', justifyContent: 'center',
       background: 'var(--bg)',
     }}>
+      
       <div style={{
         width: '100%', maxWidth: 400,
         background: 'var(--surface)',
@@ -36,6 +40,16 @@ export default function Login() {
         borderRadius: 'var(--radius-lg)',
         padding: '2.5rem',
       }}>
+        <div style={{ textAlign: 'center', marginBottom: 20 }}>
+  <button onClick={() => navigate('/')} style={{
+    background: 'none', border: 'none',
+    display: 'inline-flex', alignItems: 'center', gap: 6,
+    fontSize: 13, color: 'var(--text-muted)', cursor: 'pointer',
+  }}>
+    <ArrowLeft size={14}/> Retour à l'accueil
+  </button>
+</div>
+        
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{
             width: 44, height: 44, borderRadius: 12,
