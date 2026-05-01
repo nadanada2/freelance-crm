@@ -1,4 +1,4 @@
-# FreelanceCRM
+# FlowLance
 
 CRM intelligent conçu pour les freelances. Centralise clients, projets
 et factures en un seul outil avec des rappels automatiques.
